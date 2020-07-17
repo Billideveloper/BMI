@@ -44,5 +44,49 @@ class resultvc: UIViewController {
     
     
     
+    
+    
+    
+    @IBAction func share_Results(_ sender: Any) {
+        
+        
+        share()
+        
+    }
+    
+    
+    
+    
+    func share(){
+        
+        
+        backview.layer.borderColor = UIColor.black.cgColor
+        
+        //UIGraphicsBeginImageContextw(backview.frame.size)
+        
+        
+        UIGraphicsBeginImageContextWithOptions(backview.frame.size, true, 0.0)
+        backview.layer.render(in: UIGraphicsGetCurrentContext()!)
+        
+        
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else{
+            return
+        }
+        
+        UIGraphicsEndImageContext()
+        
+        
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        
+        present(activityVC, animated: true, completion: nil)
+        
+        //after image shared activity
+        
+        viewDidAppear(true)
+
+        self.view.removeFromSuperview()
+        
+    
+    }
    
 }
